@@ -91,6 +91,13 @@ if (ENABLE_SOLVERS)
     add_subdirectory (LinearSolvers)
 endif ()
 
+if (ENABLE_CATALYST)
+    enable_language(C)
+    find_package(catalyst 2.0 REQUIRED)
+    message (STATUS "Enable Catalyst")
+    message (STATUS "Found catalyst_DIR: ${catalyst_DIR}")
+endif()
+
 include_directories (
     BEFORE ${CMAKE_CURRENT_SOURCE_DIR}
     )
@@ -105,7 +112,7 @@ if ("${KokkosAccelerators}" MATCHES ".+;.+")
 endif()
 message("Timer fences for this build: ${TimerFences}")
 target_compile_definitions(ippl PUBLIC IPPL_ENABLE_TIMER_FENCES=${TimerFences})
-target_link_libraries(ippl PUBLIC Kokkos::kokkos ${HEFFTE_LIBRARY})
+target_link_libraries(ippl PUBLIC Kokkos::kokkos ${HEFFTE_LIBRARY} catalyst::catalyst) 
 
 install (TARGETS ippl DESTINATION lib)
 install (FILES ${IPPL_BASEDIR_HDRS} DESTINATION include)

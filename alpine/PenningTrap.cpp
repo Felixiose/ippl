@@ -45,6 +45,10 @@ const char* TestName   = "PenningTrap";
 int main(int argc, char* argv[]) {
     ippl::initialize(argc, argv);
     {
+#ifdef ENABLE_CATALYST
+        CatalystAdaptor::Initialize(argc, argv);
+#endif
+
         Inform msg(TestName);
         Inform msg2all(TestName, INFORM_ALL_NODES);
 
@@ -77,7 +81,9 @@ int main(int argc, char* argv[]) {
         manager.run(manager.getNt());
 
         msg << "End." << endl;
-
+#ifdef ENABLE_CATALYST
+        CatalystAdaptor::Finalize();
+#endif
         IpplTimings::stopTimer(mainTimer);
         IpplTimings::print();
         IpplTimings::print(std::string("timing.dat"));

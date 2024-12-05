@@ -1,0 +1,33 @@
+Subject: Assistance Needed with Catalyst Integration and Persistent Segmentation Faults
+
+Hi Sri, I hope you're doing well.
+
+Over the past two weeks, I have been working on the In-Situ. Despite multiple attempts, I have encountered persistent issues that I have been unable to solve. Below is a summary of the steps I have taken so far:
+
+1. Built Catalyst from Source: I attempted to compile Catalyst from source and run the "minimal/stub" version, but this approach did not work.
+2. Compiled ParaView with Catalyst Included: I built ParaView from source, ensuring that Catalyst was included in the build process. Unfortunately, this also did not resolve the issue.
+3. Installed Catalyst via Homebrew: I installed Catalyst using Homebrew with Python support enabled. Despite this, the integration remains non-functional.
+Each of these attempts has resulted in different error messages. The most frequent error I encounter is a segmentation fault:
+
+[Felixs-MacBook-Pro.local:98432] shmem: mmap: an error occurred while determining whether or not /Users/felix/my_temp/ompi.Felixs-MacBook-Pro.501/jf.0/2844327936/sm_segment.Felixs-MacBook-Pro.501.a9890000.0 could be created.
+[Felixs-MacBook-Pro:98432] *** Process received signal ***
+[Felixs-MacBook-Pro:98432] Signal: Segmentation fault: 11 (11)
+[Felixs-MacBook-Pro:98432] Signal code: Invalid permissions (2)
+[Felixs-MacBook-Pro:98432] Failing at address: 0x0
+[Felixs-MacBook-Pro:98432] [ 0] 0   libsystem_platform.dylib            0x0000000188a03a24 _sigtramp + 56
+[Felixs-MacBook-Pro:98432] [ 1] 0   ???                                 0xffff80018887a710 0x0 + 18446603342806755088
+[Felixs-MacBook-Pro:98432] [ 2] 0   libsystem_c.dylib                   0x000000018887a710 atoi + 56
+[Felixs-MacBook-Pro:98432] [ 3] 0   PenningTrap                         0x0000000104020428 main + 172
+[Felixs-MacBook-Pro:98432] [ 4] 0   dyld                                0x00000001886590e0 start + 2360
+*** End of error message ***
+zsh: segmentation fault  ./PenningTrap ../../../ippl/test/stream/catalyst_pipeline.py
+
+The times I've been able to run the pipeline without a segmentation fault (testing suite) I don't get any window to pop up. I've tried running the pipeline with the command given in the README file, but it doesn't work. 
+
+I have reached a point where I need your guidance on how to proceed as I am unable to make any progress on my own. 
+
+Additionally, I would like to discuss my current role and responsibilities. I was initially hired as a Teaching Assistant and am finding the software engineering tasks to be outside of my expertise. I appreciate any support or adjustments that can be made to align my role more closely with my skill set.
+
+Thank you for your understanding and support. I look forward to your guidance on these matters.
+
+Best, Félix

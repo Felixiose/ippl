@@ -7,6 +7,9 @@ set (IPPL_VERSION_NAME "V${IPPL_VERSION_MAJOR}.${IPPL_VERSION_MINOR}")
 option(DOWNLOAD_EXTRACT_TIMESTAMP ON FORCE)
 set (IPPL_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
+
+
+
 if(NOT WIN32)
     string(ASCII 27 Esc)
     set(ColourReset "${Esc}[m")
@@ -143,9 +146,9 @@ set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMakeModules")
 
 
 
-find_package (MPI REQUIRED)
-include_directories(${MPI_INCLUDE_PATH})
-link_directories(${MPI_LIBRARY_PATH})
+find_package (MPI REQUIRED COMPONENTS CXX)
+# include_directories(${MPI_INCLUDE_PATH})
+# link_directories(${MPI_LIBRARY_PATH})
 
 
 
@@ -209,14 +212,21 @@ endif ()
 
 option (ENABLE_SOLVERS "Enable IPPL solvers" ON)
 
+
+set(ENABLE_CATALYST ON)
+set(DCATALYST_DIR "/Users/felix/Work/catalyst")
+
+
+
+
 add_subdirectory (src)
 
-option (ENABLE_TESTS "Enable IPPL tests" OFF)
+option (ENABLE_TESTS "Enable IPPL tests" ON)
 if (ENABLE_TESTS)
     add_subdirectory (test)
 endif ()
 
-option (ENABLE_ALPINE "Enable Alpine" OFF)
+option (ENABLE_ALPINE "Enable Alpine" ON)
 if (ENABLE_ALPINE)
     if (NOT ENABLE_SOLVERS)
         message (FATAL_ERROR "Cannot enable Alpine since Solver not enabled (-DENABLE_SOLVERS=ON)!")
